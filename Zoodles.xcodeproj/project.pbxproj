@@ -13,10 +13,23 @@
 		90420030223D36790022A640 /* Saving_Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9042002E223D36790022A640 /* Saving_Data.xcdatamodeld */; };
 		90420032223D36800022A640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90420031223D36800022A640 /* Assets.xcassets */; };
 		90420035223D36800022A640 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90420033223D36800022A640 /* LaunchScreen.storyboard */; };
+		9042003D223D38940022A640 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042003C223D38940022A640 /* PersistenceService.swift */; };
+		90420040223D3BF50022A640 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042003E223D3BF50022A640 /* Person+CoreDataClass.swift */; };
+		90420041223D3BF60022A640 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042003F223D3BF50022A640 /* Person+CoreDataProperties.swift */; };
+		90420043223D44A60022A640 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90420042223D44A60022A640 /* CreateAccountViewController.swift */; };
+		90420048223D6CEC0022A640 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90420047223D6CEC0022A640 /* SignInViewController.swift */; };
+		9042004B223DC3CA0022A640 /* SelectedEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042004A223DC3C90022A640 /* SelectedEventsViewController.swift */; };
+		9042004E223DEB4E0022A640 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042004C223DEB4E0022A640 /* Event+CoreDataClass.swift */; };
+		9042004F223DEB4E0022A640 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042004D223DEB4E0022A640 /* Event+CoreDataProperties.swift */; };
+		90420051223ED46E0022A640 /* BusScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90420050223ED46E0022A640 /* BusScheduleViewController.swift */; };
+		90420056223ED8490022A640 /* BusSchedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90420052223ED8490022A640 /* BusSchedule+CoreDataClass.swift */; };
+		90420057223ED8490022A640 /* BusSchedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90420053223ED8490022A640 /* BusSchedule+CoreDataProperties.swift */; };
+		90420058223ED8490022A640 /* Bus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90420054223ED8490022A640 /* Bus+CoreDataClass.swift */; };
+		90420059223ED8490022A640 /* Bus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90420055223ED8490022A640 /* Bus+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		90420024223D36790022A640 /* Saving Data.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Saving Data.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90420024223D36790022A640 /* Zoodles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zoodles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90420027223D36790022A640 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90420029223D36790022A640 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9042002C223D36790022A640 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -24,6 +37,19 @@
 		90420031223D36800022A640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90420034223D36800022A640 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90420036223D36800022A640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9042003C223D38940022A640 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		9042003E223D3BF50022A640 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9042003F223D3BF50022A640 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		90420042223D44A60022A640 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		90420047223D6CEC0022A640 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		9042004A223DC3C90022A640 /* SelectedEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEventsViewController.swift; sourceTree = "<group>"; };
+		9042004C223DEB4E0022A640 /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9042004D223DEB4E0022A640 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		90420050223ED46E0022A640 /* BusScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusScheduleViewController.swift; sourceTree = "<group>"; };
+		90420052223ED8490022A640 /* BusSchedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusSchedule+CoreDataClass.swift"; sourceTree = "<group>"; };
+		90420053223ED8490022A640 /* BusSchedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusSchedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		90420054223ED8490022A640 /* Bus+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+CoreDataClass.swift"; sourceTree = "<group>"; };
+		90420055223ED8490022A640 /* Bus+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +74,7 @@
 		90420025223D36790022A640 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				90420024223D36790022A640 /* Saving Data.app */,
+				90420024223D36790022A640 /* Zoodles.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,8 +82,21 @@
 		90420026223D36790022A640 /* Saving Data */ = {
 			isa = PBXGroup;
 			children = (
+				90420052223ED8490022A640 /* BusSchedule+CoreDataClass.swift */,
+				90420053223ED8490022A640 /* BusSchedule+CoreDataProperties.swift */,
+				90420054223ED8490022A640 /* Bus+CoreDataClass.swift */,
+				90420055223ED8490022A640 /* Bus+CoreDataProperties.swift */,
+				9042004C223DEB4E0022A640 /* Event+CoreDataClass.swift */,
+				9042004D223DEB4E0022A640 /* Event+CoreDataProperties.swift */,
+				9042003E223D3BF50022A640 /* Person+CoreDataClass.swift */,
+				9042003F223D3BF50022A640 /* Person+CoreDataProperties.swift */,
 				90420027223D36790022A640 /* AppDelegate.swift */,
+				9042003C223D38940022A640 /* PersistenceService.swift */,
+				90420050223ED46E0022A640 /* BusScheduleViewController.swift */,
+				90420042223D44A60022A640 /* CreateAccountViewController.swift */,
+				90420047223D6CEC0022A640 /* SignInViewController.swift */,
 				90420029223D36790022A640 /* ViewController.swift */,
+				9042004A223DC3C90022A640 /* SelectedEventsViewController.swift */,
 				9042002B223D36790022A640 /* Main.storyboard */,
 				90420031223D36800022A640 /* Assets.xcassets */,
 				90420033223D36800022A640 /* LaunchScreen.storyboard */,
@@ -70,9 +109,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		90420023223D36790022A640 /* Saving Data */ = {
+		90420023223D36790022A640 /* Zoodles */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90420039223D36800022A640 /* Build configuration list for PBXNativeTarget "Saving Data" */;
+			buildConfigurationList = 90420039223D36800022A640 /* Build configuration list for PBXNativeTarget "Zoodles" */;
 			buildPhases = (
 				90420020223D36790022A640 /* Sources */,
 				90420021223D36790022A640 /* Frameworks */,
@@ -82,9 +121,9 @@
 			);
 			dependencies = (
 			);
-			name = "Saving Data";
+			name = Zoodles;
 			productName = "Saving Data";
-			productReference = 90420024223D36790022A640 /* Saving Data.app */;
+			productReference = 90420024223D36790022A640 /* Zoodles.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +141,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9042001F223D36780022A640 /* Build configuration list for PBXProject "Saving Data" */;
+			buildConfigurationList = 9042001F223D36780022A640 /* Build configuration list for PBXProject "Zoodles" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +154,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				90420023223D36790022A640 /* Saving Data */,
+				90420023223D36790022A640 /* Zoodles */,
 			);
 		};
 /* End PBXProject section */
@@ -138,7 +177,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90420058223ED8490022A640 /* Bus+CoreDataClass.swift in Sources */,
+				90420051223ED46E0022A640 /* BusScheduleViewController.swift in Sources */,
+				9042004F223DEB4E0022A640 /* Event+CoreDataProperties.swift in Sources */,
+				90420043223D44A60022A640 /* CreateAccountViewController.swift in Sources */,
+				90420057223ED8490022A640 /* BusSchedule+CoreDataProperties.swift in Sources */,
 				9042002A223D36790022A640 /* ViewController.swift in Sources */,
+				9042004E223DEB4E0022A640 /* Event+CoreDataClass.swift in Sources */,
+				9042003D223D38940022A640 /* PersistenceService.swift in Sources */,
+				90420056223ED8490022A640 /* BusSchedule+CoreDataClass.swift in Sources */,
+				90420041223D3BF60022A640 /* Person+CoreDataProperties.swift in Sources */,
+				9042004B223DC3CA0022A640 /* SelectedEventsViewController.swift in Sources */,
+				90420048223D6CEC0022A640 /* SignInViewController.swift in Sources */,
+				90420059223ED8490022A640 /* Bus+CoreDataProperties.swift in Sources */,
+				90420040223D3BF50022A640 /* Person+CoreDataClass.swift in Sources */,
 				90420028223D36790022A640 /* AppDelegate.swift in Sources */,
 				90420030223D36790022A640 /* Saving_Data.xcdatamodeld in Sources */,
 			);
@@ -289,6 +341,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TSTJ65Q2X5;
 				INFOPLIST_FILE = "Saving Data/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,6 +360,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TSTJ65Q2X5;
 				INFOPLIST_FILE = "Saving Data/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -321,7 +375,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9042001F223D36780022A640 /* Build configuration list for PBXProject "Saving Data" */ = {
+		9042001F223D36780022A640 /* Build configuration list for PBXProject "Zoodles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90420037223D36800022A640 /* Debug */,
@@ -330,7 +384,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90420039223D36800022A640 /* Build configuration list for PBXNativeTarget "Saving Data" */ = {
+		90420039223D36800022A640 /* Build configuration list for PBXNativeTarget "Zoodles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9042003A223D36800022A640 /* Debug */,
