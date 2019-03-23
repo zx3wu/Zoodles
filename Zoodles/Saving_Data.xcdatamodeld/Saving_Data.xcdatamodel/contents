@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Bus" representedClassName="Bus" syncable="YES">
+        <attribute name="busID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="busName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="newRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BusSchedule" inverseName="newRelationship" inverseEntity="BusSchedule" syncable="YES"/>
+    </entity>
+    <entity name="BusSchedule" representedClassName="BusSchedule" syncable="YES">
+        <attribute name="arrivalTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="busID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bus" inverseName="newRelationship" inverseEntity="Bus" syncable="YES"/>
+    </entity>
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="eventEndTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="eventID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventStartTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Location1" representedClassName="Location1" syncable="YES">
+        <attribute name="busID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="busRouteID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="direction" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Location2" representedClassName="Location2" syncable="YES">
+        <attribute name="busID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="busRouteID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="direction" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Location3" representedClassName="Location3" syncable="YES">
+        <attribute name="busID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="busRouteID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="direction" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Location4" representedClassName="Location4" syncable="YES">
+        <attribute name="busID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="busRouteID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="direction" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName="Person" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Bus" positionX="-33.41796875" positionY="-235.23046875" width="128" height="90"/>
+        <element name="BusSchedule" positionX="162.95703125" positionY="-304.4140625" width="128" height="105"/>
+        <element name="Event" positionX="132.8671875" positionY="-138.04296875" width="128" height="135"/>
+        <element name="Person" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="Location1" positionX="-44.09375" positionY="-394.55859375" width="128" height="105"/>
+        <element name="Location2" positionX="471.32421875" positionY="-471.08984375" width="128" height="105"/>
+        <element name="Location3" positionX="-49.11328125" positionY="-417.125" width="128" height="105"/>
+        <element name="Location4" positionX="118.70703125" positionY="-502.46875" width="128" height="105"/>
+    </elements>
+</model>
