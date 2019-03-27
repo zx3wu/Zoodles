@@ -362,11 +362,17 @@ class ViewController: UIViewController, EKEventEditViewDelegate , UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMMM dd at HH:mm"
+        
+        let startTimeString = dateFormatterPrint.string(from: eventArray[indexPath.row].event.startDate!)
+        let endTimeString = dateFormatterPrint.string(from: eventArray[indexPath.row].event.endDate)
+        
         let checkedBoxes = eventArray[(indexPath as NSIndexPath).row]
         
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         cell.textLabel?.text = eventArray[indexPath.row].event.title
-        cell.detailTextLabel?.text = eventArray[indexPath.row].event.location
+        cell.detailTextLabel?.text = "\(eventArray[indexPath.row].event.location!) From:  \(startTimeString)  To:  \(endTimeString)"
         
         cell.accessoryType = checkedBoxes.enabled ? UITableViewCell.AccessoryType.checkmark : UITableViewCell.AccessoryType.none
         

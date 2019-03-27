@@ -25,6 +25,10 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     let todaysDate = Date()
     var selectedDateString = ""
     
+    
+    
+    var locationKey: [String: String] = [:]
+    
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,7 +38,13 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var month: UILabel!
     
     
+    
+    
     override func viewDidLoad() {
+        locationKey["Home"] = "Location1"
+        locationKey["Laurier"] = "Location2"
+        locationKey["CPH"] = "Location3"
+        locationKey["CIF"] = "Location4"
         
         selectedDateString = formatter.string(from: todaysDate)
         
@@ -111,6 +121,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func handleCellTextSelected(view: JTAppleCell?, cellState: CellState) {
+        tableView.reloadData()
         guard let validCell = view as? CustomCell else  { return }
         
         let todaysDate = Date()
@@ -183,10 +194,98 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let startTimeString = dateFormatterPrint.string(from: selectedDateEventArray[indexPath.row].startDate)
         let endTimeString = dateFormatterPrint.string(from: selectedDateEventArray[indexPath.row].endDate)
+        let currentTimeString = dateFormatterPrint.string(from: Date())
+        
+        let currentTime = dateFormatterPrint.date(from: currentTimeString)!
+        let currentDate = formatter.string(from: Date())
+            
+        var busID: Any?
+        
+        var closestTime = ""
+        var closestDate = TimeInterval(600000)
+            
+        if indexPath.row >= 0 {
+            let currentLocation = "Home"
+            let location = locationKey[currentLocation]
+            //let nextLocation = selectedDateEventArray[indexPath.row + 1].location
+            //let nextEventStart = selectedDateEventArray[indexPath.row + 1].startDate
             
             
-        if indexPath.row == 0 {
+            let lastDate = ""
             
+           
+            
+            
+            
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: location!)
+            let sortDescriptor = NSSortDescriptor(key: "busRouteID", ascending: true)
+            let sortDescriptors = [sortDescriptor]
+            fetchRequest.sortDescriptors = sortDescriptors
+            fetchRequest.predicate = NSPredicate(format: "direction == true")
+            do {
+                let result = try PersistenceService.context.fetch(fetchRequest)
+                
+                for data in result as! [NSManagedObject] {
+                    
+
+                    let timeString = data.value(forKey: "time")
+                    let time = dateFormatterPrint.date(from: timeString as! String)
+                    let formattedStartTime = dateFormatterPrint.date(from: startTimeString as! String)?.addingTimeInterval(-600)
+                    print(time)
+                    print(formattedStartTime)
+                    if time! < formattedStartTime! {
+                        print("time interval \((formattedStartTime!.timeIntervalSince((time)!)))")
+                        if (formattedStartTime!.timeIntervalSince((time)!)) < closestDate {
+                            closestDate = (formattedStartTime!.timeIntervalSince((time)!))
+                            
+                            closestTime = timeString as! String
+                            print("closest \(closestTime)")
+                            
+                        }
+                        
+                        if selectedDateString == currentDate {
+                            if currentTime < time! {
+                                print(dateFormatterPrint.date(from: startTimeString))
+                                print("greater")
+                                
+                                busID = data.value(forKey: "busID")!
+                            } else {
+                                cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + ": No busses available during this time"
+                                //cell.detailTextLabel?.text = selectedDateEventArray[indexPath.row].location! + "\(startTimeString) - \(endTimeString)"
+                            }
+                        } else {
+                            print("selected date is  \(selectedDateString)")
+                            print(dateFormatterPrint.date(from: startTimeString))
+                            print("greater")
+                            cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + " Take Bus Route:  \( data.value(forKey: "busID")) at \(timeString)"
+                            
+                        }
+                        
+                        //let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: location!)
+                        //fetchRequest.predicate = NSPredicate(format: "direction = true AND time = %@",timeString as! CVarArg)
+                        
+                        /*do {
+                            let result = try PersistenceService.context.fetch(fetchRequest)
+                            for data in result as! [NSManagedObject] {
+                                cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + "Bus: " + data.value(forKey: "Bus")
+                            }
+                        } catch {
+                            print("Failed")
+                        }
+                        */
+                        
+                        
+                        
+                        
+                    }
+                    
+                }
+            
+            } catch {
+            
+                print("Failed")
+            }
+    
                 
         } else {
             
@@ -197,9 +296,15 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         
 
         print(selectedDateEventArray)
-        
-            cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + "Bus: "
-            cell.detailTextLabel?.text = eventArray[indexPath.row].location! + " Time \(startTimeString) - \(endTimeString)"
+            guard let bus = busID else {
+               
+                cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + "- No busses available at the time"
+                return cell
+            }
+                
+            cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + " - Take Bus Route: \( bus) at \(closestTime)"
+            cell.detailTextLabel?.text = "Location & Time: " + selectedDateEventArray[indexPath.row].location! + " \(startTimeString) - \(endTimeString)"
+            
         }
         
         
