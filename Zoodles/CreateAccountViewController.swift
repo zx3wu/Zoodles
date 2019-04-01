@@ -23,6 +23,9 @@ class CreateAccountViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Create Acccount"
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.hideKeyboardWhenTappedAround()
+        self.navigationController!.navigationBar.topItem!.title = "Sign In"
     }
 
     
@@ -61,9 +64,16 @@ class CreateAccountViewController: UIViewController {
         default: break
         }
     }
-    //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 }

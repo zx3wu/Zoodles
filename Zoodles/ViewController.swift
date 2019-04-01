@@ -161,12 +161,19 @@ class ViewController: UIViewController, EKEventEditViewDelegate , UITableViewDat
     
     override func viewDidAppear(_ animated: Bool) {
         requestData()
+        proceedButton.isHidden = true
     }
     
     override func viewDidLoad() {
         
+        proceedButton.isHidden = true
+        
         print("current \(currentUser)")
         self.title = currentUser + "'s Events"
+        
+        self.navigationController!.navigationBar.topItem!.title = "Sign Out"
+        
+
         
         super.viewDidLoad()
         tableView.refreshControl = refreshController
@@ -211,8 +218,69 @@ class ViewController: UIViewController, EKEventEditViewDelegate , UITableViewDat
         datePicker?.addTarget(self, action: #selector(self.dateChanged(datePicker:)), for: .valueChanged)
         
         pickDate.inputView = datePicker
+        
+        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.longPress(longPressGestureRecognizer:)))
+        self.view.addGestureRecognizer(longPressRecognizer)
+        
+        
+        /*let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+      
+        
+        
+        //init(rawValue: 98) ?? UIBlurEffect.Style(rawValue: 0)!)
+       
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.alpha = 0.6
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+        
+        self.view.addSubview(popOver)
+        
+        self.popOver.layer.cornerRadius = 10
+        popOver.center.y = view.center.y - 200
+        popOver.center.x = view.center.x + 75
+        
+        
+        self.view.addSubview(popOver2)
+        
+        self.popOver2.layer.cornerRadius = 10
+        popOver2.center.y = view.center.y + 200
+        popOver2.center.x = view.center.x + 75
+        
+        
+        self.view.addSubview(popOver3)
+        
+        self.popOver3.layer.cornerRadius = 10
+        popOver3.center.y = view.center.y
+        popOver3.center.x = view.center.x*/
+        
+        
+       
+        
+        
     }
-  
+    /*@IBOutlet var popOver3: UIView!
+    
+    
+    @IBAction func okButton3(_ sender: Any) {
+        self.popOver3.removeFromSuperview()
+        view.removeBlurEffect()
+    }
+    @IBAction func okButton2(_ sender: Any) {
+        self.popOver2.removeFromSuperview()
+        view.removeBlurEffect()
+    }
+    
+    @IBOutlet var popOver2: UIView!
+    
+    @IBAction func okButton(_ sender: Any) {
+        self.popOver.removeFromSuperview()
+        view.removeBlurEffect()
+        
+    }*/
+    
     @objc func dateChanged(datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
         
@@ -250,7 +318,7 @@ class ViewController: UIViewController, EKEventEditViewDelegate , UITableViewDat
         
         let calendars = store.calendars(for: .event)
         for calendar in calendars {
-            if calendar.title != "US Holidays" && calendar.title != "Birthdays" {
+            if calendar.title != "Canadian Holidays" && calendar.title != "US Holidays" && calendar.title != "Birthdays" {
                 let now = NSDate(timeIntervalSinceNow: 0)
                 
                 let predicate = store.predicateForEvents(withStart: now as Date, end: dateInterval as Date, calendars: [calendar])
@@ -363,7 +431,7 @@ class ViewController: UIViewController, EKEventEditViewDelegate , UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "MMMM dd at HH:mm"
+        dateFormatterPrint.dateFormat = "MMMM dd HH:mm"
         
         let startTimeString = dateFormatterPrint.string(from: eventArray[indexPath.row].event.startDate!)
         let endTimeString = dateFormatterPrint.string(from: eventArray[indexPath.row].event.endDate)
@@ -372,9 +440,10 @@ class ViewController: UIViewController, EKEventEditViewDelegate , UITableViewDat
         
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         cell.textLabel?.text = eventArray[indexPath.row].event.title
+        cell.detailTextLabel?.numberOfLines = 3
         cell.detailTextLabel?.text = "\(eventArray[indexPath.row].event.location!) From:  \(startTimeString)  To:  \(endTimeString)"
         
-        cell.accessoryType = checkedBoxes.enabled ? UITableViewCell.AccessoryType.checkmark : UITableViewCell.AccessoryType.none
+        cell.accessoryType = checkedBoxes.enabled ? UITableViewCell.AccessoryType.checkmark: UITableViewCell.AccessoryType.none
         
         return cell
     }
@@ -385,6 +454,7 @@ class ViewController: UIViewController, EKEventEditViewDelegate , UITableViewDat
         } else {
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
             print("selected \(indexPath.row )")
+            proceedButton.isHidden = false
             
         }
         
@@ -394,5 +464,56 @@ class ViewController: UIViewController, EKEventEditViewDelegate , UITableViewDat
         
         
     }
+    @IBOutlet weak var proceedButton: UIButton!
+    @objc func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
+            let touchPoint = longPressGestureRecognizer.location(in: self.tableView)
+            
+            if let indexPath = tableView.indexPathForRow(at: CGPoint(x: touchPoint.x, y: touchPoint.y)) {
+                
+               
+                editEvent(eventTitle: eventArray[indexPath.row].event.title, eventLocation: eventArray[indexPath.row].event.location ?? "", eventStartDate: eventArray[indexPath.row].event.startDate as NSDate, eventEndDate: eventArray[indexPath.row].event.endDate as NSDate, VC: self)
+    }
+        }
+    }
     
+
+    
+    func editEvent(eventTitle: String, eventLocation: String, eventStartDate: NSDate, eventEndDate: NSDate, VC: UIViewController) {
+        
+        //let event = EKEvent(eventStore: eventStore)
+        let startDate = eventStartDate
+        let endDate = eventEndDate
+        let predicate = eventStore.predicateForEvents(withStart: startDate as Date, end: endDate as Date, calendars: nil)
+        let existingEvents = eventStore.events(matching: predicate)
+        for singleEvent in existingEvents {
+            if singleEvent.title == eventTitle && singleEvent.startDate == startDate as Date {
+                print(singleEvent)
+                let controller = EKEventEditViewController()
+                controller.event = singleEvent
+                controller.eventStore = eventStore
+                controller.editViewDelegate = self
+                VC.present(controller, animated: true, completion: nil)
+                
+                
+            }
+        }
+    }
+        
+        
+
+            
+
+    
+}
+
+extension UIView {
+    
+    /// Remove UIBlurEffect from UIView
+    func removeBlurEffect() {
+        let blurredEffectViews = self.subviews.filter{$0 is UIVisualEffectView}
+        blurredEffectViews.forEach{ blurView in
+            blurView.removeFromSuperview()
+        }
+    }
 }

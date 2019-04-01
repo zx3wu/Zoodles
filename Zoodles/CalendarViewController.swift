@@ -25,7 +25,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     let todaysDate = Date()
     var selectedDateString = ""
     
-    
+    var timeArray: [NSDate] = []
     
     var locationKey: [String: String] = [:]
     
@@ -48,7 +48,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         
         selectedDateString = formatter.string(from: todaysDate)
         
-        self.title = currentUser + "'s Selected Events"
+        self.title = currentUser + "'s Bus Schedule"
         
         /*for event in eventArray {
             
@@ -205,7 +205,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         var closestDate = TimeInterval(600000)
             
         if indexPath.row >= 0 {
-            let currentLocation = "Home"
+            let currentLocation = "CIF"
             let location = locationKey[currentLocation]
             //let nextLocation = selectedDateEventArray[indexPath.row + 1].location
             //let nextEventStart = selectedDateEventArray[indexPath.row + 1].startDate
@@ -213,17 +213,14 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
             
             let lastDate = ""
             
-           
-            
-            
-            
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: location!)
-            let sortDescriptor = NSSortDescriptor(key: "busRouteID", ascending: true)
-            let sortDescriptors = [sortDescriptor]
-            fetchRequest.sortDescriptors = sortDescriptors
+            //let sortDescriptor = NSSortDescriptor(key: "busRouteID", ascending: true)
+            //let sortDescriptors = [sortDescriptor]
+            //fetchRequest.sortDescriptors = sortDescriptors
             fetchRequest.predicate = NSPredicate(format: "direction == true")
             do {
                 let result = try PersistenceService.context.fetch(fetchRequest)
+                print(" data is \(result)")
                 
                 for data in result as! [NSManagedObject] {
                     
@@ -247,17 +244,29 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
                             if currentTime < time! {
                                 print(dateFormatterPrint.date(from: startTimeString))
                                 print("greater")
+                                timeArray.append(dateFormatterPrint.date(from: startTimeString) as! NSDate)
                                 
                                 busID = data.value(forKey: "busID")!
+                                print(busID)
                             } else {
+                                 cell.textLabel?.numberOfLines = 3
                                 cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + ": No busses available during this time"
                                 //cell.detailTextLabel?.text = selectedDateEventArray[indexPath.row].location! + "\(startTimeString) - \(endTimeString)"
                             }
                         } else {
+                            busID = data.value(forKey: "busID")!
                             print("selected date is  \(selectedDateString)")
                             print(dateFormatterPrint.date(from: startTimeString))
                             print("greater")
-                            cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + " Take Bus Route:  \( data.value(forKey: "busID")) at \(timeString)"
+                            guard let bus = busID else {
+                                cell.textLabel?.numberOfLines = 3
+                                cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + "- No buses available at this time"
+                                return cell
+                            }
+                            
+                            cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + " - Take Bus Route: \( bus) at \(closestTime)"
+                           cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + " Take Bus Route:  \( data.value(forKey: "busID")) at \(timeString)"
+                           
                             
                         }
                         
@@ -297,19 +306,16 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
 
         print(selectedDateEventArray)
             guard let bus = busID else {
-               
-                cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + "- No busses available at the time"
+                cell.textLabel?.numberOfLines = 3
+                cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + "- No buses available at this time"
                 return cell
             }
                 
             cell.textLabel?.text = selectedDateEventArray[indexPath.row].title! + " - Take Bus Route: \( bus) at \(closestTime)"
+            cell.detailTextLabel?.numberOfLines = 3
             cell.detailTextLabel?.text = "Location & Time: " + selectedDateEventArray[indexPath.row].location! + " \(startTimeString) - \(endTimeString)"
-            
         }
-        
-        
         return cell
-        
     }
     
 
@@ -343,6 +349,7 @@ extension CalendarViewController: JTAppleCalendarViewDataSource {
 extension CalendarViewController: JTAppleCalendarViewDelegate {
     //display the cell
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+        //selectedDateEventArray = []
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         self.calendar(calendar, willDisplay: cell, forItemAt: date, cellState: cellState, indexPath: indexPath)
         sharedFunctionToConfigureCell(myCustomCell: cell, cellState: cellState, date: date)
@@ -360,12 +367,14 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
     }
     
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+        //selectedDateEventArray = []
         // This function should have the same code as the cellForItemAt function
         let myCustomCell = cell as! CustomCell
         sharedFunctionToConfigureCell(myCustomCell: myCustomCell, cellState: cellState, date: date)
     }
     
     func sharedFunctionToConfigureCell(myCustomCell: CustomCell, cellState: CellState, date: Date) {
+        //selectedDateEventArray = []
         myCustomCell.dateLabel.text = cellState.text
         
     }

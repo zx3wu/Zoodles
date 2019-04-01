@@ -25,13 +25,13 @@ class SignInViewController: UIViewController {
         
         guard let users = try! PersistenceService.context.fetch(fetchRequest) as? [Person] else { return }
         
-        if users.isEmpty {
+        /*if users.isEmpty {
             let alert = UIAlertController(title: "Invalid username", message: "Please create an account", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
             
             present(alert, animated: true, completion: nil)
-        }
+        }*/
         
         users.forEach({ print($0.username) })
         
@@ -76,11 +76,11 @@ class SignInViewController: UIViewController {
             print("Failed")
         }*/
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Sign In"
+        self.hideKeyboardWhenTappedAround()
     }
     
     
